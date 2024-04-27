@@ -38,8 +38,7 @@ const Timesheet = ({ exit }: FormProps) =>{
             className="block w-full border-b border-b-gray-400 bg-transparent py-1 pl-1 outline-none focus-within:font-medium" 
             type="text" 
             name="name" 
-            id="name" 
-            required />
+            id="name" />
           { !!formErrors.name?.message && <p className="text-red-600 text-[clamp(14px,3vw,16px)]">{ formErrors.name.message }</p> }
         </div>
         <div className="mb-[clamp(16px,4vw,32px)]">
@@ -50,10 +49,9 @@ const Timesheet = ({ exit }: FormProps) =>{
           <input 
             { ...register("hours") }
             className="block w-full border-b border-b-gray-400 bg-transparent py-1 pl-1 outline-none focus-within:font-medium" 
-            type="hours" 
+            type="number" 
             name="hours" 
-            id="hours" 
-            required />
+            id="hours" />
           { !!formErrors.hours?.message && <p className="text-red-600 text-[clamp(14px,3vw,16px)]">{ formErrors.hours.message }</p> }
         </div>
         <motion.button
@@ -79,7 +77,7 @@ const Timesheet = ({ exit }: FormProps) =>{
               opacity: 0,
               x: "100%"
             }} 
-            className="rounded-lg rounded-r-none rounded-br-none bg-dark-one text-white py-4 px-8 fixed right-0 top-0">
+            className="rounded-lg rounded-r-none rounded-br-none bg-gray-900 text-white py-4 px-8 fixed right-0 top-0">
             <p className="text-[clamp(14px,3vw,18px)]">Log successfully added!!</p>
           </motion.div>
         ) }

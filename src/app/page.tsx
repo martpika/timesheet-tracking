@@ -8,12 +8,39 @@ import { useExpansion } from "./lib/hooks/useExpansion"
 import { 
   motion,
   AnimatePresence } from "framer-motion"
+import { useTimesheetStore } from "./store/timesheet"
 
 
 const Page = () =>{
   const { 
     isExpanded,
     handleExpansion } = useExpansion()
+  const { data: timesheets } = useTimesheetStore()
+
+  const renderTimesheet = () =>{
+    const mappedTimesheet = timesheets.map(data => (
+      <tr className="border-t border-gray-200">
+        <td className="pr-4 py-3 text-sm text-gray-700">{ data.name }</td>
+        <td className="pr-4 py-3 text-sm text-gray-700">{ data.hours }</td>
+        <td className="pr-4 py-3">
+          <div className="flex justify-end">
+            <button className="text-blue-600 mr-2">
+              <div className=" h-6 w-6">
+                <EditIcon />
+              </div>
+            </button>
+            <button className="text-red-600">
+              <div className=" h-6 w-6">
+                <DeleteIcon />
+              </div>
+            </button>
+          </div>
+        </td>
+      </tr>
+    ))
+
+    return mappedTimesheet
+  }
 
   return (
     <main className="bg-[#f8f8fd] min-h-screen pt-8 px-4">
@@ -32,37 +59,18 @@ const Page = () =>{
               </tr>
             </thead>
             <tbody className=" border-b border-gray-200">
-              <tr className="border-t border-gray-200">
-                <td className="pr-4 py-3 text-sm text-gray-700">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                <td className="pr-4 py-3 text-sm text-gray-700">Malcolm Lockyer</td>
-                <td className="pr-4 py-3">
-                  <div className="flex justify-end">
-                    <button className="text-blue-600 mr-2">
-                      <div className=" h-6 w-6">
-                        <EditIcon />
-                      </div>
-                    </button>
-                    <button className="text-red-600">
-                      <div className=" h-6 w-6">
-                        <DeleteIcon />
-                      </div>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr className="border-t border-gray-2">
-                <td className="pr-4 py-3 text-sm text-gray-700">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                <td className="pr-4 py-3 text-sm text-gray-700">Malcolm Lockyer</td>
-              </tr>
+              { renderTimesheet() }
             </tbody>
           </table>
         </div>
-        <button 
+        <motion.button 
           className=" bg-blue-500 text-white py-2 px-4 rounded"
           onClick={ handleExpansion }
-          aria-expanded={ isExpanded }>
-            Log Time
-        </button>
+          aria-expanded={ isExpanded }
+          whileHover={{
+            y: "-5%"
+          }}>Add log
+        </motion.button>
         <AnimatePresence>
           { isExpanded && (
             <BaseModal exit={ handleExpansion }>

@@ -1,3 +1,4 @@
+import { addTimesheet } from "@/app/store/timesheet"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { 
   useEffect, 
@@ -11,10 +12,12 @@ import { z } from "zod"
 const formSchema = z.object({
   name: z
     .string()
-    .min(4, "Please enter the name"),
+    .min(4, "Minimum of 4 characters"),
   hours: z
-    .number()
-    .gt(0, "Should be minimum of 1 hour")
+    .string()
+    .refine(val => parseInt(val) > 0, {
+      message: "Minimum of 1 hour"
+    })
 })
 
 type FormSchema = z.TypeOf<typeof formSchema>
@@ -31,7 +34,16 @@ export const useTimesheet = () =>{
   })
   const [ isTimesheetSuccess, setIsTimesheetSuccess ] = useState(false)
 
+
   const submitHandler: SubmitHandler<FormSchema> = async(data) =>{
+    if ( isTimesheetSuccess ) return 
+
+    setIsTimesheetSuccess(false)
+    addTimesheet({
+      name: data.name,
+      hours: parseInt(data.hours)
+    })
+    setIsTimesheetSuccess(true)
     reset()
   }
 
@@ -39,7 +51,7 @@ export const useTimesheet = () =>{
     if ( isTimesheetSuccess ) {
       const timeout = setTimeout(() =>{
         setIsTimesheetSuccess(false)
-      }, 5000)
+      }, 3000)
 
       return () => { clearTimeout(timeout) }
     }
