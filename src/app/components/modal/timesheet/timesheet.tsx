@@ -16,7 +16,7 @@ const Timesheet = ({ exit }: FormProps) =>{
     isTimesheetSuccess } = useTimesheet()
 
   return (
-    <div className="relative z-10 bg-white rounded-lg max-w-[768px] mx-auto py-[clamp(64px,10vw,96px)] px-[clamp(40px,10vw,96px)]">
+    <div className="relative z-10 bg-white rounded-lg max-w-[768px] mx-auto py-[clamp(64px,10vw,80px)] px-[clamp(40px,10vw,80px)]">
       <button 
         onClick={ exit }
         className="absolute right-[clamp(40px,10vw,64px)] top-10 opacity-70">

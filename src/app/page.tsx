@@ -57,8 +57,8 @@ const Page = () =>{
           <table className="text-left w-full mb-8">
             <thead>
               <tr>
-                <th className="font-semibold pr-4 py-3">Project name</th>
-                <th className="font-semibold pr-4 py-3">Hours</th>
+                <th className="font-semibold text-sm pr-4 py-3">Project name</th>
+                <th className="font-semibold text-sm pr-4 py-3">Hours</th>
                 <th className=" w-1/6"></th>
               </tr>
             </thead>
