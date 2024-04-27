@@ -13,7 +13,7 @@ const Page = () =>{
           <h2 className=" text-[clamp(16px,3vw,18px)] font-bold text-gray-900 mb-2">Timesheet tracking</h2>
           <p className="text-sm text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, eos.</p>
         </div>
-        <table className="table-fixed text-left w-full">
+        <table className="table-fixed text-left w-full mb-8">
           <thead>
             <tr>
               <th className="font-semibold pr-4 py-3">Name</th>
@@ -21,8 +21,8 @@ const Page = () =>{
               <th className=" w-1/6"></th>
             </tr>
           </thead>
-          <tbody>
-            <tr className="border-t border-gray-2">
+          <tbody className=" border-b border-gray-200">
+            <tr className="border-t border-gray-200">
               <td className="pr-4 py-3 text-sm text-gray-700">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
               <td className="pr-4 py-3 text-sm text-gray-700">Malcolm Lockyer</td>
               <td className="pr-4 py-3">
@@ -46,6 +46,7 @@ const Page = () =>{
             </tr>
           </tbody>
         </table>
+        <button className=" bg-blue-500 text-white py-2 px-4 rounded">Log Time</button>
       </div>
     </main>
   )
