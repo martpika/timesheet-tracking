@@ -8,7 +8,10 @@ import { useExpansion } from "./lib/hooks/useExpansion"
 import { 
   motion,
   AnimatePresence } from "framer-motion"
-import { useTimesheetStore } from "./store/timesheet"
+import { 
+  TimesheetData, 
+  deleteTimesheet, 
+  useTimesheetStore } from "./store/timesheet"
 
 
 const Page = () =>{
@@ -17,19 +20,20 @@ const Page = () =>{
     handleExpansion } = useExpansion()
   const { data: timesheets } = useTimesheetStore()
 
+  const handleDeleteTimesheet = (index: number) =>{
+    deleteTimesheet(index)
+  }
+
   const renderTimesheet = () =>{
-    const mappedTimesheet = timesheets.map(data => (
-      <tr className="border-t border-gray-200">
+    const mappedTimesheet = timesheets.map((data, index) => (
+      <tr className="border-t border-gray-200 group">
         <td className="pr-4 py-3 text-sm text-gray-700">{ data.name }</td>
         <td className="pr-4 py-3 text-sm text-gray-700">{ data.hours }</td>
         <td className="pr-4 py-3">
-          <div className="flex justify-end">
-            <button className="text-blue-600 mr-2">
-              <div className=" h-6 w-6">
-                <EditIcon />
-              </div>
-            </button>
-            <button className="text-red-600">
+          <div className="flex justify-end group opacity-0 transition-all group-hover:opacity-100">
+            <button
+              onClick={ () => handleDeleteTimesheet(index)  } 
+              className="text-red-600">
               <div className=" h-6 w-6">
                 <DeleteIcon />
               </div>

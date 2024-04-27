@@ -2,7 +2,7 @@ import { create } from "zustand"
 import { createSelectors } from ".."
 
 
-type TimesheetData = {
+export type TimesheetData = {
   name: string
   hours: number
 }
@@ -22,6 +22,14 @@ export const useTimesheetStoreBase = create<TimesheetState>(() => ({
 
 export const addTimesheet = ( newInformation: TimesheetData) => useTimesheetStoreBase.setState(state => ({
   data: state.data.concat(newInformation)
+})) 
+
+type DeleteTimesheetProps = TimesheetData & {
+  index: number
+}
+
+export const deleteTimesheet = ( index: number ) => useTimesheetStoreBase.setState(state => ({
+  data: state.data.filter((_, idx) => index!==idx)
 })) 
 
 export const useTimesheetStore = createSelectors(useTimesheetStoreBase)
